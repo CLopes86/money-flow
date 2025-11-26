@@ -319,7 +319,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   
   ### **Cesaltino Lopes**
   
-  🎓 3rd Year - Computer Science & Multimedia @ IPCB  
+  🎓 3rd Year - Informatica & Multimedia @ IPCB  
   💻 Mobile Developer | Flutter Enthusiast  
   🚒 Volunteer Firefighter since 2023  
   🚀 Building professional-grade applications

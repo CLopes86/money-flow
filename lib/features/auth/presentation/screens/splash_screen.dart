@@ -136,11 +136,28 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/images/penny_logo.png',
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.contain,
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(
+                            255,
+                            215,
+                            0,
+                            0.4,
+                          ), // Glow dourado
+                          blurRadius: 30,
+                          spreadRadius: 10,
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      'assets/images/penny_logo.png',
+                      width: 160,
+                      height: 160,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   SizedBox(height: 24),
                   Text(
@@ -148,8 +165,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Color(0xFFFFD700), // ← DOURADO!
                       letterSpacing: 8,
+                      shadows: [
+                        Shadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.5),
+                          blurRadius: 15,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 16),
@@ -157,8 +181,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                     'Your smart financial companion',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white70,
+                      color: Color(0xFFE0E0E0), // Cinza prateado - sofisticado
                       letterSpacing: 1,
+                      shadows: [
+                        Shadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.3),
+                          blurRadius: 8,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
                   ),
                 ],

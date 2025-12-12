@@ -50,14 +50,21 @@
   - UserModel with JSON and Firebase conversion
   - fromFirebase, fromJson, toJson methods
 
+- [x] **Data Layer (Auth Feature)**
+  - [x] AuthRemoteDataSource (Firebase calls)
+  - [x] AuthRepositoryImpl (Repository implementation)
+- [x] **Presentation Layer (Auth Feature)**
+  - [x] Splash Screen (Animated)
+  - [x] Login Screen (UI + Logic)
+  - [/] Register Screen (UI initiated)
+  - [x] State management with Riverpod
+- [x] **Core**
+  - [x] App Theme (Indigo + Gold palette)
+  - [/] Dashboard (Basic implementation)
+
 ### 🚧 In Progress
-- [ ] **Data Layer (Auth Feature)**
-  - AuthRemoteDataSource (Firebase calls)
-  - AuthRepositoryImpl (Repository implementation)
 - [ ] **Presentation Layer (Auth Feature)**
-  - Login Screen
-  - Register Screen
-  - State management with Riverpod
+  - Register Screen (Form implementation)
 
 ### 🔮 Planned
 - [ ] Transaction management (Add, Edit, Delete)
@@ -102,35 +109,40 @@ This project follows **Clean Architecture** principles with strict separation of
 lib/
 ├── core/                       # Shared code
 │   ├── constants/             # App constants
+│   ├── theme/                 # ✅ App Theme & Colors
 │   ├── utils/                 # Utility functions
 │   └── errors/                # Custom errors
 │
 └── features/
-    └── auth/                   # Authentication feature
-        │
-        ├── domain/             # ✅ COMPLETE - Business Logic Layer
-        │   ├── entities/
-        │   │   └── user.dart                    # User entity with validation
-        │   ├── repositories/
-        │   │   └── auth_repository.dart         # Repository interface
-        │   └── usecases/
-        │       ├── login_user.dart              # Login use case
-        │       ├── register_user.dart           # Register use case
-        │       ├── logout_user.dart             # Logout use case
-        │       └── get_current_user.dart        # Get current user use case
-        │
-        ├── data/               # 🚧 IN PROGRESS - Data Layer
-        │   ├── models/
-        │   │   └── user_model.dart              # ✅ User model with conversions
-        │   ├── datasources/
-        │   │   └── auth_remote_datasource.dart  # ⏳ Firebase calls (next)
-        │   └── repositories/
-        │       └── auth_repository_impl.dart    # ⏳ Repository implementation (next)
-        │
-        └── presentation/       # ⏳ TODO - UI Layer
-            ├── providers/      # Riverpod providers
-            ├── screens/        # Full screens
-            └── widgets/        # Reusable widgets
+    ├── auth/                   # Authentication feature
+    │   │
+    │   ├── domain/             # ✅ COMPLETE - Business Logic Layer
+    │   │   ├── entities/
+    │   │   │   └── user.dart                    # User entity with validation
+    │   │   ├── repositories/
+    │   │   │   └── auth_repository.dart         # Repository interface
+    │   │   └── usecases/
+    │   │       ├── login_user.dart              # Login use case
+    │   │       ├── register_user.dart           # Register use case
+    │   │       ├── logout_user.dart             # Logout use case
+    │   │       └── get_current_user.dart        # Get current user use case
+    │   │
+    │   ├── data/               # ✅ COMPLETE - Data Layer
+    │   │   ├── models/
+    │   │   │   └── user_model.dart              # User model with conversions
+    │   │   ├── datasources/
+    │   │   │   └── auth_remote_datasource.dart  # Firebase calls
+    │   │   └── repositories/
+    │   │       └── auth_repository_impl.dart    # Repository implementation
+    │   │
+    │   └── presentation/       # 🚧 IN PROGRESS - UI Layer
+    │       ├── controllers/    # Riverpod Notifiers (AuthController)
+    │       ├── providers/      # Dependency Injection
+    │       └── screens/        # Login, Register, Splash
+    │
+    └── dashboard/              # 🚧 IN PROGRESS - Dashboard Feature
+        └── presentation/
+            └── screens/        # DashboardScreen
 ```
 
 ### Architecture Benefits
@@ -196,18 +208,29 @@ lib/
 - Future/async/await
 - Immutability
 
-### Data Layer - Auth Feature 🚧 33%
+### Data Layer - Auth Feature ✅ 100%
 
-**UserModel ✅**
+**UserModel**
 - Extends User entity
 - fromFirebase(firebase_auth.User) - Converts Firebase user
 - fromJson(Map) - Converts from JSON
 - toJson() - Converts to JSON
 - Factory constructors for conversions
 
-**Next Steps ⏳**
-- AuthRemoteDataSource - Direct Firebase calls
-- AuthRepositoryImpl - Connect Domain to Data
+**Repositories & DataSources**
+- AuthRemoteDataSource - Implemented with Firebase Auth
+- AuthRepositoryImpl - Connects Domain to Data layers
+
+### Presentation Layer - Auth Feature 🚧 70%
+
+**Screens**
+- Splash Screen: Animated with auth check ✅
+- Login Screen: UI, Validation, Riverpod Integration ✅
+- Register Screen: UI Structure created 🚧
+
+**State Management**
+- AuthController (AsyncNotifierProvider) handles all logic
+- Global Error Handling via SnackBars
 
 ---
 

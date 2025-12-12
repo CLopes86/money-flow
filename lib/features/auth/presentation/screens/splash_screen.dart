@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:penny/features/auth/presentation/screens/login_screen.dart';
+import 'package:penny/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'dart:async';
 import '../controllers/auth_controller.dart';
 
@@ -87,7 +88,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
         if (user != null) {
           print('✅ User logado: ${user.email}. Indo para Dashboard...');
-          // TODO: Navegar para Dashboard
+          if (mounted) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const DashboardScreen()),
+            );
+          }
         } else {
           print('🔓 Nenhum user logado. Indo para Login...');
           if (mounted) {
@@ -184,7 +189,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   ),
                   SizedBox(height: 16),
                   Text(
-                    'Your smart financial companion',
+                    'O teu companheiro financeiro inteligente',
                     style: TextStyle(
                       fontSize: 16,
                       color: Color(0xFFE0E0E0), // Cinza prateado - sofisticado

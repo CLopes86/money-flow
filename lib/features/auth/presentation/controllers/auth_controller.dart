@@ -127,4 +127,18 @@ class AuthController extends _$AuthController {
       state = AsyncValue.error(e, stackTrace);
     }
   }
+
+  // ============================================
+  // MÉTODO: logout()
+  // ============================================
+  Future<void> logout() async {
+    state = const AsyncValue.loading();
+    try {
+      final logoutUserUseCase = ref.read(logoutUserProvider);
+      await logoutUserUseCase.call();
+      state = const AsyncValue.data(null);
+    } catch (e, stackTrace) {
+      state = AsyncValue.error(e, stackTrace);
+    }
+  }
 }

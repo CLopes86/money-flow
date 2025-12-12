@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../controllers/auth_controller.dart';
+import 'package:penny/features/auth/presentation/screens/register_screen.dart';
 
+/// Ecrã de Login
+///
+/// Permite aos utilizadores autenticarem-se na aplicação utilizando Email e Password.
+/// Utiliza [ConsumerStatefulWidget] para interagir com o [AuthController] via Riverpod.
+///
+/// Funcionalidades:
+/// - Validação de formulário
+/// - Feedback visual de sucesso/erro (SnackBars)
+/// - Navegação para o Ecrã de Registo
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -26,7 +36,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Escuta mudanças no estado de autenticação
+    // ref.listen: "Escuta" mudanças sem reconstruir o widget inteiro.
+    // Ideal para mostrar diálogos, SnackBars ou navegação baseada em estado.
     ref.listen(authControllerProvider, (previous, next) {
       next.when(
         data: (user) {
@@ -155,6 +166,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        // ref.read: "Lê" o provider apenas uma vez.
+                        // Usamos .notifier para aceder aos métodos da classe (login).
                         ref
                             .read(authControllerProvider.notifier)
                             .login(
@@ -174,7 +187,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         style: TextStyle(color: Colors.grey[600]),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterScreen(),
+                            ),
+                          );
+                        },
                         child: const Text('Registar-se'),
                       ),
                     ],

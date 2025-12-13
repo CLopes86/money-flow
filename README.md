@@ -56,7 +56,7 @@
 - [x] **Presentation Layer (Auth Feature)**
   - [x] Splash Screen (Animated)
   - [x] Login Screen (UI + Logic)
-  - [/] Register Screen (UI initiated)
+  - [x] Register Screen (UI implementation)
   - [x] State management with Riverpod
 - [x] **Core**
   - [x] App Theme (Indigo + Gold palette)
@@ -64,7 +64,7 @@
 
 ### 🚧 In Progress
 - [ ] **Presentation Layer (Auth Feature)**
-  - Register Screen (Form implementation)
+  - Register Screen (Connecting logic)
 
 ### 🔮 Planned
 - [ ] Transaction management (Add, Edit, Delete)

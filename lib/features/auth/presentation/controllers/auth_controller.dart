@@ -129,6 +129,51 @@ class AuthController extends _$AuthController {
   }
 
   // ============================================
+  // MÉTODO: register()
+  // ============================================
+  //
+  // OBJETIVO:
+  // Registar um novo utilizador na Firebase
+  //
+  // PARÂMETROS:
+  // - email: O email do utilizador
+  // - password: A palavra-passe
+  // - displayName: O nome (opcional, mas bom ter)
+  //
+  // FLUXO:
+  // 1. Loading...
+  // 2. Chama o "Caso de Uso" de Registo
+  // 3. Sucesso -> Guarda o utilizador no estado
+  // 4. Erro -> Guarda o erro no estado
+  // ============================================
+  Future<void> register({
+    required String email,
+    required String password,
+    String? displayName,
+  }) async {
+    // 1. Avisa a app que estamos a trabalhar (Loading)
+    state = const AsyncValue.loading();
+
+    // 2. Prepara a ferramenta de registo
+    final registerUserUseCase = ref.read(registerUserProvider);
+
+    try {
+      // 3. Tenta registar
+      final user = await registerUserUseCase.call(
+        email: email,
+        password: password,
+        displayName: displayName,
+      );
+
+      // 4. Sucesso! Guarda o novo utilizador na memória
+      state = AsyncValue.data(user);
+    } catch (e, stackTrace) {
+      // 5. Ups! Algo correu mal. Guarda o erro.
+      state = AsyncValue.error(e, stackTrace);
+    }
+  }
+
+  // ============================================
   // MÉTODO: logout()
   // ============================================
   Future<void> logout() async {

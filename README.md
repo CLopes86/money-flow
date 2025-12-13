@@ -85,6 +85,12 @@
 - [ ] **🚦 Traffic Light Budgets** - Visual limits (Green/Yellow/Red)
 - [ ] **📊 Smart Analytics** - Spending by category & evolution charts
 
+### 🔐 Security & Compliance (EU/GDPR)
+- **Database Encryption**: AES-256 via Isar/Hive + `flutter_secure_storage` for keys.
+- **SSL Pinning**: Prevent Man-in-the-Middle attacks for API calls.
+- **Biometric Enforcement**: Mandatory FaceID/TouchID via `local_auth`.
+- **Legal**: In-app Privacy Policy & "Not Financial Advice" Terms.
+
 ---
 
 ## 🛠️ Tech Stack

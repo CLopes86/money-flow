@@ -314,7 +314,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 24),
+                      IconButton(
+                        onPressed: () {
+                          ref
+                              .read(authControllerProvider.notifier)
+                              .authenticateWithBiometrics();
+                        },
+                        icon: const Icon(
+                          Icons.fingerprint,
+                          size: 40,
+                          color: Color(0xFF6366F1),
+                        ),
+                      ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

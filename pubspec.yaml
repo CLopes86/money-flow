@@ -24,6 +24,7 @@ dependencies:
 
   # Utilities
   equatable: ^2.0.7
+  local_auth: ^2.3.0
 
 dev_dependencies:
   flutter_test:

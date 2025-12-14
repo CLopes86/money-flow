@@ -18,6 +18,7 @@ import '../../domain/usecases/register_user.dart';
 import '../../domain/usecases/logout_user.dart';
 import '../../domain/usecases/get_current_user.dart';
 import '../providers/auth_providers.dart';
+import 'package:local_auth/local_auth.dart';
 
 // Ficheiro gerado automaticamente pelo build_runner
 part 'auth_controller.g.dart';
@@ -184,6 +185,45 @@ class AuthController extends _$AuthController {
       state = const AsyncValue.data(null);
     } catch (e, stackTrace) {
       state = AsyncValue.error(e, stackTrace);
+    }
+  }
+
+  // ============================================
+  // MÉTODO: authenticateWithBiometrics()
+  // ============================================
+  //
+  // OBJETIVO:
+  // Tentar login usando FaceID ou Impressão Digital
+  //
+  // FLUXO:
+  // 1. Verifica se o telemóvel suporta biometria
+  // 2. Se sim, mostra o pop-up nativo
+  // 3. Se autenticar com sucesso, faz login (Lógica futura)
+  // ============================================
+  Future<void> authenticateWithBiometrics() async {
+    final LocalAuthentication auth = LocalAuthentication();
+
+    final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
+    final bool canAuthenticate =
+        canAuthenticateWithBiometrics || await auth.isDeviceSupported();
+
+    if (!canAuthenticate) {
+      return;
+    }
+
+    try {
+      final bool didAuthenticate = await auth.authenticate(
+        localizedReason: 'Por favor autentique-se para aceder à sua conta',
+        options: const AuthenticationOptions(
+          biometricOnly: true,
+          stickyAuth: true,
+        ),
+      );
+      if (didAuthenticate) {
+        print("Biometria ACEITE! 🔓");
+      }
+    } catch (e) {
+      print('Erro na biometria: $e');
     }
   }
 }
